@@ -16,6 +16,12 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+	//virtual void HandleClick(const &FInputActionValue val)
+
 	UPROPERTY(BlueprintReadWrite)
 	class UInputMappingContext* InputMapping;
 	UPROPERTY(BlueprintReadWrite)
@@ -25,11 +31,7 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* RegMovement;
 	UPROPERTY(BlueprintReadWrite)
-	class UInputAction* Jump;
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	class UInputAction* playerJump;
 
 public:	
 	// Called every frame
