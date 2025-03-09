@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "EnhancedInputComponent.h"
 #include "BaseCharacter.generated.h"
-
 
 UCLASS()
 class LASTMINUTELEGENDS_API ABaseCharacter : public ACharacter
@@ -20,7 +20,19 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//virtual void HandleClick(const &FInputActionValue val)
+	UFUNCTION()
+	virtual void HandleClick(const FInputActionValue& val);
+	UFUNCTION()
+	virtual void HandleMovement(const FInputActionValue& val);
+	UFUNCTION()
+	virtual void HandleCamera(const FInputActionValue& val);
+	UFUNCTION()
+	virtual void HandleJump(const FInputActionValue& val);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USpringArmComponent* springArm;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UCameraComponent* cameraPlayer;
 
 	UPROPERTY(BlueprintReadWrite)
 	class UInputMappingContext* InputMapping;
@@ -32,6 +44,13 @@ protected:
 	class UInputAction* RegMovement;
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* playerJump;
+
+	UPROPERTY(BlueprintReadWrite)
+	float jumpVelocity;
+	UPROPERTY(BlueprintReadWrite)
+	float walkSpeed;
+	UPROPERTY(BlueprintReadWrite)
+	float airControl;
 
 public:	
 	// Called every frame

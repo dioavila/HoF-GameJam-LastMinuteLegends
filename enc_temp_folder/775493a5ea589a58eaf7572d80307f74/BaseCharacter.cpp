@@ -20,9 +20,9 @@ ABaseCharacter::ABaseCharacter()
 	cameraPlayer = CreateDefaultSubobject<UCameraComponent>("Camera");
 	cameraPlayer->SetupAttachment(springArm);
 	
-	jumpVelocity = 600;
-	walkSpeed = 600;
-	airControl = 1.0f;
+	jumpVelocity = 300;
+	walkSpeed = 300;
+	airControl = 100.f;
 }
 
 // Called when the game starts or when spawned
