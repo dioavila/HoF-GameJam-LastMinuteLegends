@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"D:\\UnrealProjs\\HoFGameJam\\HoF-GameJam-LastMinuteLegends\\LastMinuteLegends\\Source\\LastMinuteLegends\\LastMinuteLegends.Build.cs",
+		"D:\\UnrealProjs\\HoFGameJam\\HoF-GameJam-LastMinuteLegends\\LastMinuteLegends\\Source\\LastMinuteLegends.Target.cs",
+		"D:\\UnrealProjs\\HoFGameJam\\HoF-GameJam-LastMinuteLegends\\LastMinuteLegends\\Source\\LastMinuteLegendsEditor.Target.cs"
+	],
+	"EngineVersion": "5.4.4"
+}

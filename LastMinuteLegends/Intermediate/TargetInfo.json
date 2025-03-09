@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "LastMinuteLegends",
+			"Path": "..\\Source\\LastMinuteLegends.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "LastMinuteLegendsEditor",
+			"Path": "..\\Source\\LastMinuteLegendsEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
