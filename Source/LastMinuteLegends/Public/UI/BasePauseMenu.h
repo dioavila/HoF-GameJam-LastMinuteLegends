@@ -29,5 +29,5 @@ public:
 	class UBaseButtonWithText* ResumeButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	class UBaseButtonWithText* QuitButton;
+	class UBaseButtonWithText* MenuButton;
 };
