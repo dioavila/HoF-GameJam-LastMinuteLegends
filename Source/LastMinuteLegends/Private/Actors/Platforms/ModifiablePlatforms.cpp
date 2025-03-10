@@ -41,6 +41,7 @@ void AModifiablePlatforms::ExtensionBegin()
 	if (canMove)
 	{
 		canMove = false;
+		OnPlatformMove.Broadcast();
 		PrimaryActorTick.SetTickFunctionEnable(true);
 	}
 }
