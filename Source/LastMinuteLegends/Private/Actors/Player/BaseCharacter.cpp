@@ -65,15 +65,12 @@ void ABaseCharacter::MagicTouch()
 	FCollisionObjectQueryParams params;
 	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 
-	DrawDebugLine(GetWorld(), cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), FColor::Magenta, false, 10.f);
 	GetWorld()->LineTraceSingleByObjectType(touchCast, cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), params);
 	if(touchCast.bBlockingHit)
 	{
-		DrawDebugSphere(GetWorld(), touchCast.ImpactPoint, 100.f, 10, FColor::Magenta, true, 10.f);
 		AModifiablePlatforms* Platform = Cast<AModifiablePlatforms>(touchCast.GetActor());
 		if (Platform)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
 			Platform->ExtensionBegin();
 		}
 	}
