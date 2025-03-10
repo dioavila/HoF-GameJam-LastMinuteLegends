@@ -11,6 +11,7 @@
 #include "Actors/Platforms/ModifiablePlatforms.h"
 #include "UI/BasePlayerHUD.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Animation/BaseAnimation.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
@@ -49,6 +50,7 @@ void ABaseCharacter::BeginPlay()
 	FInputModeGameOnly inputMode;
 	//inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
 	pCon->SetInputMode(inputMode);
+	anim = Cast<UBaseAnimation>(GetMesh()->GetAnimInstance());
 
 	HUD = CreateWidget<UBasePlayerHUD>(pCon, playerHUD, "Player UI");
 	HUD->AddToViewport();
@@ -71,6 +73,7 @@ void ABaseCharacter::MagicTouch()
 		AModifiablePlatforms* Platform = Cast<AModifiablePlatforms>(touchCast.GetActor());
 		if (Platform)
 		{
+			anim->PlayPoint();
 			Platform->ExtensionBegin();
 		}
 	}
@@ -85,13 +88,13 @@ void ABaseCharacter::HandleClick(const FInputActionValue& val)
 void ABaseCharacter::HandleMovX(const FInputActionValue& val)
 {
 	FVector contextualForwardVector = FVector::CrossProduct(GetActorRightVector(), FVector(0, 0, 1));
-	AddMovementInput(contextualForwardVector, val.Get<float>());
+	AddMovementInput(contextualForwardVector, val.Get<float>()*100);
 }
 
 void ABaseCharacter::HandleMovY(const FInputActionValue& val)
 {
 	FVector contextualForwardVector = FVector::CrossProduct(GetActorRightVector(), FVector(0, 0, 1));
-	AddMovementInput(GetActorRightVector(), val.Get<float>());
+	AddMovementInput(GetActorRightVector(), val.Get<float>()*100);
 }
 
 //void ABaseCharacter::HandleMovement(const FInputActionValue& val)

@@ -64,6 +64,9 @@ protected:
 	UPROPERTY()
 	UBasePlayerHUD* HUD;
 
+	UPROPERTY()
+	class UBaseAnimation* anim;
+
 	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
 	float jumpVelocity;
 	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
