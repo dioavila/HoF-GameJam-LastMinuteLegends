@@ -24,16 +24,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UStaticMeshComponent* staticMesh;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Platforming Settings")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Platforming Settings")
 	float MaxExtension;
 
 	UPROPERTY(VisibleAnywhere, Category = "Platforming Settings")
 	float originalSize;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Platforming Settings")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Platforming Settings")
 	float extensionSpeed;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Platforming Settings")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platforming Settings")
 	float timeToRetract;
 
 private:
