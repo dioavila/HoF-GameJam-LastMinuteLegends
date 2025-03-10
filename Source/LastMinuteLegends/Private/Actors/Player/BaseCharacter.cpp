@@ -72,12 +72,8 @@ void ABaseCharacter::MagicTouch()
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
 			Platform->ExtensionBegin();
 		}
-
-
 	}
-		
-
-
+	
 }
 
 void ABaseCharacter::HandleClick(const FInputActionValue& val)
