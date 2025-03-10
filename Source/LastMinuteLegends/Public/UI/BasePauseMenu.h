@@ -4,28 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "BaseMainMenu.generated.h"
+#include "BasePauseMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class LASTMINUTELEGENDS_API UBaseMainMenu : public UUserWidget
+class LASTMINUTELEGENDS_API UBasePauseMenu : public UUserWidget
 {
 	GENERATED_BODY()
 	
 public:
-	virtual void NativeConstruct() override;
+	virtual void NativeConstruct() override;\
+
+	UFUNCTION(BlueprintCallable)
+	void ResumeGame();
+
+	UUserWidget* PauseMenuWidget;
 
 	UPROPERTY()
 	class UBaseGameInstance* gameInstance;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	class UBaseButtonWithText* PlayButton;
+	class UBaseButtonWithText* ResumeButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	class UBaseButtonWithText* QuitButton;
-
-	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	class UBaseButtonWithText* CreditsButton;
 };
