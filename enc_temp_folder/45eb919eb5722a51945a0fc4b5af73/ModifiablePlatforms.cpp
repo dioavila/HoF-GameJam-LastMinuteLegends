@@ -53,7 +53,7 @@ void AModifiablePlatforms::Tick(float DeltaTime)
 	if(toExtend)
 	{
 		currentExtension = FMath::Lerp(currentExtension, MaxExtension, DeltaTime * extensionSpeed);
-		if (currentExtension >= MaxExtension-.02f)
+		if (currentExtension >= MaxExtension-.1f)
 		{
 			toExtend = false;
 			FTimerHandle TimerHandle;
@@ -68,7 +68,7 @@ void AModifiablePlatforms::Tick(float DeltaTime)
 	else 
 	{
 		currentExtension = FMath::Lerp(currentExtension, originalSize, DeltaTime * extensionSpeed);
-		if (currentExtension <= originalSize+.02f)
+		if (currentExtension <= originalSize+.1f)
 		{
 			toExtend = true;
 			canMove = true;

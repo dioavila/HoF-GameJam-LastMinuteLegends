@@ -18,6 +18,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	void RetractionBegin();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UStaticMeshComponent* staticMesh;
@@ -31,11 +33,13 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Platforming Settings")
 	float extensionSpeed;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Platforming Settings")
+	float timeToRetract;
+
 private:
-	bool isMoving;
+	bool toExtend;
 	bool canMove;
 	float currentExtension;
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
