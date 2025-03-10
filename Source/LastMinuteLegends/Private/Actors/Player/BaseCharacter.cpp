@@ -70,15 +70,27 @@ void ABaseCharacter::HandleClick(const FInputActionValue& val)
 	MagicTouch();
 }
 
-void ABaseCharacter::HandleMovement(const FInputActionValue& val)
+void ABaseCharacter::HandleMovX(const FInputActionValue& val)
 {
 	FVector contextualForwardVector = FVector::CrossProduct(GetActorRightVector(), FVector(0, 0, 1));
-
-	AddMovementInput(contextualForwardVector, val.Get<FVector2D>().X * 1000.f);
-	AddMovementInput(GetActorRightVector(), val.Get<FVector2D>().Y);
-	//AddMovementInput(FRotator(0, GetControlRotation().Yaw, 0).Vector(), val.Get<FVector2D>().X);
-	//AddMovementInput(FRotator(0,GetControlRotation().Yaw, 0).Vector(), val.Get<FVector2D>().Y);
+	AddMovementInput(contextualForwardVector, val.Get<float>());
 }
+
+void ABaseCharacter::HandleMovY(const FInputActionValue& val)
+{
+	FVector contextualForwardVector = FVector::CrossProduct(GetActorRightVector(), FVector(0, 0, 1));
+	AddMovementInput(GetActorRightVector(), val.Get<float>());
+}
+
+//void ABaseCharacter::HandleMovement(const FInputActionValue& val)
+//{
+//	FVector contextualForwardVector = FVector::CrossProduct(GetActorRightVector(), FVector(0, 0, 1));
+//	AddMovementInput(contextualForwardVector, val.Get<FVector2D>().X);
+//	AddMovementInput(GetActorRightVector(), val.Get<FVector2D>().Y);
+//	//AddMovementInput(contextualForwardVector, val.Get<float>());
+//	//AddMovementInput(GetActorRightVector(), val.Get<float>());
+//
+//}
 
 void ABaseCharacter::HandleCamera(const FInputActionValue& val)
 {
@@ -104,7 +116,9 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	UEnhancedInputComponent* eInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (eInput) {
-		eInput->BindAction(RegMovement, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleMovement);
+		//eInput->BindAction(RegMovement, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleMovement);
+		eInput->BindAction(movX, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleMovX);
+		eInput->BindAction(movY, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleMovY);
 		eInput->BindAction(CamMovement, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleCamera);
 		eInput->BindAction(playerJump, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleJump);
 		eInput->BindAction(MouseClick, ETriggerEvent::Triggered, this, &ABaseCharacter::HandleClick);
