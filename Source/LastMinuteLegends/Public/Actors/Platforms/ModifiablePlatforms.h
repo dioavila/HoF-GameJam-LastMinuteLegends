@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "ModifiablePlatforms.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlatformMove);
+
 UCLASS()
 class LASTMINUTELEGENDS_API AModifiablePlatforms : public AActor
 {
@@ -15,6 +17,10 @@ public:
 	// Sets default values for this actor's properties
 	AModifiablePlatforms();
 	void ExtensionBegin();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnPlatformMove OnPlatformMove;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

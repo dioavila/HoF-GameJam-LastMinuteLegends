@@ -16,6 +16,9 @@ class LASTMINUTELEGENDS_API UBaseGameInstance : public UGameInstance
 	
 public:
 	UFUNCTION(BlueprintCallable)
+	void MenuGame();
+
+	UFUNCTION(BlueprintCallable)
 	void PlayGame();
 
 	UFUNCTION(BlueprintCallable)

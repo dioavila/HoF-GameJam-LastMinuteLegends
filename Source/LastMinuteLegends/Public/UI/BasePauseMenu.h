@@ -15,7 +15,7 @@ class LASTMINUTELEGENDS_API UBasePauseMenu : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	virtual void NativeConstruct() override;\
+	virtual void NativeConstruct() override;
 
 	UFUNCTION(BlueprintCallable)
 	void ResumeGame();
@@ -29,5 +29,5 @@ public:
 	class UBaseButtonWithText* ResumeButton;
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
-	class UBaseButtonWithText* QuitButton;
+	class UBaseButtonWithText* MenuButton;
 };
