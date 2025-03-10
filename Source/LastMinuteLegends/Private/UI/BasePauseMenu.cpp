@@ -17,7 +17,7 @@ void UBasePauseMenu::NativeConstruct()
 
 		gameInstance = Cast<UBaseGameInstance>(world->GetGameInstance());
 		ResumeButton->OnButtonClickedInstance.AddDynamic(this, &UBasePauseMenu::ResumeGame);
-		QuitButton->OnButtonClickedInstance.AddDynamic(gameInstance, &UBaseGameInstance::QuitGame);
+		MenuButton->OnButtonClickedInstance.AddDynamic(gameInstance, &UBaseGameInstance::MenuGame);
 	}
 }
 
