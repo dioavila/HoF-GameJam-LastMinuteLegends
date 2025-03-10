@@ -36,10 +36,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platforming Settings")
 	float timeToRetract;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Platforming Settings")
+	float currentExtension;
 private:
 	bool toExtend;
 	bool canMove;
-	float currentExtension;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
