@@ -29,6 +29,9 @@ protected:
 	UFUNCTION()
 	virtual void HandleJump(const FInputActionValue& val);
 
+	UFUNCTION()
+	virtual void MagicTouch();
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USpringArmComponent* springArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -45,12 +48,14 @@ protected:
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* playerJump;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
 	float jumpVelocity;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
 	float walkSpeed;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
 	float airControl;
+	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
+	float lineDistance;
 
 public:	
 	// Called every frame

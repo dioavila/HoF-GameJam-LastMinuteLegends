@@ -15,20 +15,23 @@ ABaseCharacter::ABaseCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
 	springArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	springArm->SetupAttachment(GetRootComponent());
 	cameraPlayer = CreateDefaultSubobject<UCameraComponent>("Camera");
 	cameraPlayer->SetupAttachment(springArm);
-	
+
 	jumpVelocity = 600;
 	walkSpeed = 600;
 	airControl = 1.0f;
+	lineDistance = 3000;
 }
 
 // Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
 	APawn* pawnMode = CastChecked<APawn>(this);
 	APlayerController* pCon = CastChecked<APlayerController>(pawnMode->GetController());
 	if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(pCon->GetLocalPlayer()))
@@ -41,13 +44,30 @@ void ABaseCharacter::BeginPlay()
 			}
 		}
 	}
+	//FInputModeGameAndUI inputMode;
+	//inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
+	//pCon->SetInputMode(inputMode);
+
 	GetCharacterMovement()->JumpZVelocity = jumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = walkSpeed;
 	GetCharacterMovement()->AirControl = airControl;
 }
 
+void ABaseCharacter::MagicTouch()
+{
+	FHitResult touchCast;
+	FVector endpoint = cameraPlayer->GetForwardVector();
+	FCollisionQueryParams params;
+	params.AddIgnoredActor(this);
+
+	DrawDebugLine(GetWorld(), cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + endpoint * lineDistance, FColor::Magenta, false, 10.f);
+	GetWorld()->LineTraceSingleByObjectType(touchCast, cameraPlayer->GetForwardVector(), cameraPlayer->GetComponentLocation() + endpoint * lineDistance, ECollisionChannel::ECC_WorldDynamic, params);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
+}
+
 void ABaseCharacter::HandleClick(const FInputActionValue& val)
 {
+	MagicTouch();
 }
 
 void ABaseCharacter::HandleMovement(const FInputActionValue& val)
