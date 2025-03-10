@@ -22,8 +22,12 @@ protected:
 
 	UFUNCTION()
 	virtual void HandleClick(const FInputActionValue& val);
+	//UFUNCTION()
+	//virtual void HandleMovement(const FInputActionValue& val);
 	UFUNCTION()
-	virtual void HandleMovement(const FInputActionValue& val);
+	virtual void HandleMovX(const FInputActionValue& val);
+	UFUNCTION()
+	virtual void HandleMovY(const FInputActionValue& val);
 	UFUNCTION()
 	virtual void HandleCamera(const FInputActionValue& val);
 	UFUNCTION()
@@ -43,8 +47,12 @@ protected:
 	class UInputAction* MouseClick;
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* CamMovement;
+	//UPROPERTY(BlueprintReadWrite)
+	//class UInputAction* RegMovement;
 	UPROPERTY(BlueprintReadWrite)
-	class UInputAction* RegMovement;
+	class UInputAction* movX;
+	UPROPERTY(BlueprintReadWrite)
+	class UInputAction* movY;
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* playerJump;
 
