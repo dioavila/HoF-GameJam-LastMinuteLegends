@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include <UserSettings/EnhancedInputUserSettings.h>
+#include "Actors/Platforms/ModifiablePlatforms.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -57,12 +58,26 @@ void ABaseCharacter::MagicTouch()
 {
 	FHitResult touchCast;
 	FVector endpoint = cameraPlayer->GetForwardVector();
-	FCollisionQueryParams params;
-	params.AddIgnoredActor(this);
+	FCollisionObjectQueryParams params;
+	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 
-	DrawDebugLine(GetWorld(), cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + endpoint * lineDistance, FColor::Magenta, false, 10.f);
-	GetWorld()->LineTraceSingleByObjectType(touchCast, cameraPlayer->GetForwardVector(), cameraPlayer->GetComponentLocation() + endpoint * lineDistance, ECollisionChannel::ECC_WorldDynamic, params);
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
+	DrawDebugLine(GetWorld(), cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), FColor::Magenta, false, 10.f);
+	GetWorld()->LineTraceSingleByObjectType(touchCast, cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), params);
+	if(touchCast.bBlockingHit)
+	{
+		DrawDebugSphere(GetWorld(), touchCast.ImpactPoint, 100.f, 10, FColor::Magenta, true, 10.f);
+		AModifiablePlatforms* Platform = Cast<AModifiablePlatforms>(touchCast.GetActor());
+		if (Platform)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
+			Platform->ExtensionBegin();
+		}
+
+
+	}
+		
+
+
 }
 
 void ABaseCharacter::HandleClick(const FInputActionValue& val)
