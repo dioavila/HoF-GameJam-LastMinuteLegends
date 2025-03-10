@@ -5,6 +5,11 @@
 #include <Kismet/KismetSystemLibrary.h>
 #include <Kismet/GameplayStatics.h>
 
+void UBaseGameInstance::MenuGame()
+{
+	UGameplayStatics::OpenLevel(GetWorld(), GameLevels[0]);
+}
+
 void UBaseGameInstance::PlayGame()
 {
 	UGameplayStatics::OpenLevel(GetWorld(), GameLevels[1]);
