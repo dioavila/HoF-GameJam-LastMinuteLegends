@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include <UserSettings/EnhancedInputUserSettings.h>
 #include "Actors/Platforms/ModifiablePlatforms.h"
+#include "UI/BasePlayerHUD.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -45,9 +46,12 @@ void ABaseCharacter::BeginPlay()
 			}
 		}
 	}
-	//FInputModeGameAndUI inputMode;
+	FInputModeGameOnly inputMode;
 	//inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
-	//pCon->SetInputMode(inputMode);
+	pCon->SetInputMode(inputMode);
+
+	HUD = CreateWidget<UBasePlayerHUD>(pCon, playerHUD, "Player UI");
+	HUD->AddToViewport();
 
 	GetCharacterMovement()->JumpZVelocity = jumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = walkSpeed;
@@ -61,15 +65,12 @@ void ABaseCharacter::MagicTouch()
 	FCollisionObjectQueryParams params;
 	params.AddObjectTypesToQuery(ECollisionChannel::ECC_WorldDynamic);
 
-	DrawDebugLine(GetWorld(), cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), FColor::Magenta, false, 10.f);
 	GetWorld()->LineTraceSingleByObjectType(touchCast, cameraPlayer->GetComponentLocation(), cameraPlayer->GetComponentLocation() + (endpoint * lineDistance), params);
 	if(touchCast.bBlockingHit)
 	{
-		DrawDebugSphere(GetWorld(), touchCast.ImpactPoint, 100.f, 10, FColor::Magenta, true, 10.f);
 		AModifiablePlatforms* Platform = Cast<AModifiablePlatforms>(touchCast.GetActor());
 		if (Platform)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Magenta, FString::Printf(TEXT("Hit was: %d"), touchCast.bBlockingHit));
 			Platform->ExtensionBegin();
 		}
 	}
