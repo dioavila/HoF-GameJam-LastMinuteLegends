@@ -7,6 +7,8 @@
 #include "EnhancedInputComponent.h"
 #include "BaseCharacter.generated.h"
 
+class UBasePlayerHUD;
+
 UCLASS()
 class LASTMINUTELEGENDS_API ABaseCharacter : public ACharacter
 {
@@ -55,6 +57,12 @@ protected:
 	class UInputAction* movY;
 	UPROPERTY(BlueprintReadWrite)
 	class UInputAction* playerJump;
+
+	UPROPERTY(BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UBasePlayerHUD> playerHUD;
+
+	UPROPERTY()
+	UBasePlayerHUD* HUD;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Player Settings")
 	float jumpVelocity;

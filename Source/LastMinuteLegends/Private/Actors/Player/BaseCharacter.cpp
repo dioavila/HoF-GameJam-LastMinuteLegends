@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include <UserSettings/EnhancedInputUserSettings.h>
 #include "Actors/Platforms/ModifiablePlatforms.h"
+#include "UI/BasePlayerHUD.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -45,9 +46,12 @@ void ABaseCharacter::BeginPlay()
 			}
 		}
 	}
-	//FInputModeGameAndUI inputMode;
+	FInputModeGameOnly inputMode;
 	//inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
-	//pCon->SetInputMode(inputMode);
+	pCon->SetInputMode(inputMode);
+
+	HUD = CreateWidget<UBasePlayerHUD>(pCon, playerHUD, "Player UI");
+	HUD->AddToViewport();
 
 	GetCharacterMovement()->JumpZVelocity = jumpVelocity;
 	GetCharacterMovement()->MaxWalkSpeed = walkSpeed;
